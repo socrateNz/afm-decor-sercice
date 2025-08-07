@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY!
-const CHANNEL_ID = 'UCqJNSS6egBcy8vqNgvVYJJw'
+const CHANNEL_ID = 'UCN7dNK3VPAcY60W_Xc7l6Tg'
 const MAX_RESULTS = 10
 
 export async function GET() {
@@ -10,8 +10,6 @@ export async function GET() {
   try {
     const res = await fetch(apiUrl)
     const data = await res.json()
-
-    console.log("YouTube API response:", data)
 
     if (!data.items) {
       return NextResponse.json(

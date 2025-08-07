@@ -62,9 +62,8 @@ export default function Header() {
         >
           <Link href="/" className="flex items-center">
             <span style={{ fontFamily: 'var(--font-playfair)', fontSize: '1.5rem', fontWeight: 'bold' }} className="text-amber-500">
-              AFM Décor
+              AFM Décor & Service
             </span>
-            <span className="ml-1 text-pink-300">- Service</span>
           </Link>
         </motion.div>
 

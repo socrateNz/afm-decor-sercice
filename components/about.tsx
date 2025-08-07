@@ -86,7 +86,10 @@ export default function About() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <Phone className="text-amber-500 mr-2" />
-              <span className="text-xl" style={{ fontFamily: 'var(--font-playfair)' }}>514 622 7230</span>
+              <div className="flex flex-col">
+                <span className="text-xl" style={{ fontFamily: 'var(--font-playfair)' }}>514 622 7230</span>
+                <span className="text-xl" style={{ fontFamily: 'var(--font-playfair)' }}>438 396 4070</span>
+              </div>
             </motion.div>
           </motion.div>
         </motion.div>

@@ -1,8 +1,17 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { Phone, Mail, MapPin, Instagram, Facebook } from 'lucide-react'
 import { motion, cubicBezier, useInView } from "framer-motion"
+import { FaTiktok } from "react-icons/fa6";
+import { FaFacebookF } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa6";
+import { FaPhone } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
+import { FaMapPin } from "react-icons/fa";
+import { FaThreads } from "react-icons/fa6";
+
+
+
 
 export default function Contact() {
   const ref = useRef(null)
@@ -93,8 +102,11 @@ export default function Contact() {
                 whileHover={{ x: 10 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Phone className="h-5 w-5 text-amber-500 mr-3" />
-                <span>514 622 7230</span>
+                <FaPhone className="h-5 w-5 text-amber-500 mr-3" />
+                <div className="flex flex-col">
+                  <span>514 622 7230</span>
+                  <span>438 396 4070</span>
+                </div>
               </motion.div>
 
               <motion.div
@@ -102,7 +114,7 @@ export default function Contact() {
                 whileHover={{ x: 10 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <Mail className="h-5 w-5 text-amber-500 mr-3" />
+                <FaEnvelope className="h-5 w-5 text-amber-500 mr-3" />
                 <span>contact@afmdecor.com</span>
               </motion.div>
 
@@ -111,28 +123,60 @@ export default function Contact() {
                 whileHover={{ x: 10 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <MapPin className="h-5 w-5 text-amber-500 mr-3" />
+                <FaMapPin className="h-5 w-5 text-amber-500 mr-3" />
                 <span>Montréal, QC, Canada</span>
               </motion.div>
 
               <div className="flex space-x-4 mt-6">
                 <motion.a
-                  href="#"
+                  target="_blank"
+                  href="https://www.instagram.com/afm_decor_service?igsh=MXYxaGhzcHZnbHJnYw%3D%3D&utm_source=qr"
                   className="text-gray-600 hover:text-amber-500 transition-colors"
                   whileHover={{ scale: 1.2, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <Instagram className="h-6 w-6" />
+                  <FaInstagram className="h-6 w-6" />
                   <span className="sr-only">Instagram</span>
                 </motion.a>
-                <motion.a
-                  href="#"
+                 <motion.a
+                  target="_blank"
+                  href="https://www.facebook.com/share/1JUvixQ6mJ/?mibextid=wwXIfr"
                   className="text-gray-600 hover:text-amber-500 transition-colors"
                   whileHover={{ scale: 1.2, rotate: -5 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <Facebook className="h-6 w-6" />
+                  <FaFacebookF className="h-6 w-6" />
                   <span className="sr-only">Facebook</span>
+                </motion.a>
+                <motion.a
+                  target="_blank"
+                  href="https://www.tiktok.com/@afmdecorservice?_t=ZS-8ygenWl4dco&_r=1"
+                  className="text-gray-600 hover:text-amber-500 transition-colors"
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <FaTiktok className="h-6 w-6" />
+                  <span className="sr-only">Instagram</span>
+                </motion.a>
+                <motion.a
+                  target="_blank"
+                  href="https://www.facebook.com/share/16yJduCzny/?mibextid=wwXIfr"
+                  className="text-gray-600 hover:text-amber-500 transition-colors"
+                  whileHover={{ scale: 1.2, rotate: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <FaFacebookF className="h-6 w-6" />
+                  <span className="sr-only">Facebook</span>
+                </motion.a>
+                <motion.a
+                  target="_blank"
+                  href="https://www.threads.com/@afm_decor_service?invite=0"
+                  className="text-gray-600 hover:text-amber-500 transition-colors"
+                  whileHover={{ scale: 1.2, rotate: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <FaThreads className="h-6 w-6" />
+                  <span className="sr-only">Threads</span>
                 </motion.a>
               </div>
             </div>
