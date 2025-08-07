@@ -13,8 +13,11 @@ export default function Footer() {
               Votre partenaire de confiance pour la décoration et l'organisation d'événements à Montréal.
             </p>
             <p className="text-gray-300">
-              <span className="block">Téléphone: 514 622 7230</span>
-              <span className="block">Email: contact@afmdecor.com</span>
+              <div className="flex flex-col">
+                <span>514 622 7230</span>
+                <span>438 396 4070</span>
+              </div>
+              <span className="block">Email: afm.decor.service@gmail.com</span>
             </p>
           </div>
 
@@ -63,6 +66,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
           <p>&copy; {currentYear} AFM Décor - Service. Tous droits réservés.</p>
+          <span>Conception et implementation web par <a target="_blank" href="https://portfolio-socrate.vercel.app/en" className="text-amber-400 hover:text-amber-300 transition-colors">Etarcos Dev</a></span>
         </div>
       </div>
     </footer>

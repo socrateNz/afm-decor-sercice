@@ -97,7 +97,8 @@ export default function Contact() {
             </p>
 
             <div className="space-y-4">
-              <motion.div
+              <motion.a
+                href="tel:5146227230"
                 className="flex items-center"
                 whileHover={{ x: 10 }}
                 transition={{ type: "spring", stiffness: 300 }}
@@ -107,16 +108,17 @@ export default function Contact() {
                   <span>514 622 7230</span>
                   <span>438 396 4070</span>
                 </div>
-              </motion.div>
+              </motion.a>
 
-              <motion.div
+              <motion.a
+                href="mailto:afm.decor.service@gmail.com"
                 className="flex items-center"
                 whileHover={{ x: 10 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <FaEnvelope className="h-5 w-5 text-amber-500 mr-3" />
-                <span>contact@afmdecor.com</span>
-              </motion.div>
+                <span>afm.decor.service@gmail.com"</span>
+              </motion.a>
 
               <motion.div
                 className="flex items-center"
