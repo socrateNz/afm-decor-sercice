@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { ChevronDown } from "lucide-react"
 
 export default function Hero() {
   return (
@@ -51,6 +52,17 @@ export default function Hero() {
           </Link>
         </motion.div>
       </div>
+
+      <motion.a
+        href="#about"
+        aria-label="Découvrir la suite"
+        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, 10, 0] }}
+        transition={{ opacity: { delay: 1, duration: 0.8 }, y: { delay: 1, duration: 1.8, repeat: Infinity, ease: "easeInOut" } }}
+      >
+        <ChevronDown className="h-8 w-8" />
+      </motion.a>
     </section>
   )
 }

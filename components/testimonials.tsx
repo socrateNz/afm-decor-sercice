@@ -5,6 +5,12 @@ import { cubicBezier, motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 
+const getInitials = (name: string) => {
+  const parts = name.split(/[\s-]+/).filter(Boolean)
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+}
+
 export default function Testimonials() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
@@ -105,8 +111,11 @@ export default function Testimonials() {
                 ))}
               </motion.div>
               <p className="text-gray-700 italic mb-6">"{testimonial.text}"</p>
-              <div className="flex items-center">
-                <div className="ml-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber-400 text-white font-semibold">
+                  {getInitials(testimonial.name)}
+                </div>
+                <div>
                   <p className="font-semibold">{testimonial.name}</p>
                   <p className="text-sm text-gray-500">{testimonial.event}</p>
                 </div>

@@ -4,11 +4,13 @@ const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY!
 const CHANNEL_ID = 'UCN7dNK3VPAcY60W_Xc7l6Tg'
 const MAX_RESULTS = 10
 
+export const revalidate = 3600
+
 export async function GET() {
   const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${CHANNEL_ID}&part=snippet&order=date&type=video&maxResults=${MAX_RESULTS}`
 
   try {
-    const res = await fetch(apiUrl)
+    const res = await fetch(apiUrl, { next: { revalidate: 3600 } })
     const data = await res.json()
 
     if (!data.items) {

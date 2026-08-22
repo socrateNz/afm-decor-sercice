@@ -12,13 +12,13 @@ export default function Footer() {
             <p className="text-gray-300 mb-4">
               Votre partenaire de confiance pour la décoration et l'organisation d'événements à Montréal.
             </p>
-            <p className="text-gray-300">
+            <div className="text-gray-300">
               <div className="flex flex-col">
                 <span>514 622 7230</span>
                 <span>438 396 4070</span>
               </div>
               <span className="block">Email: afm.decor.service@gmail.com</span>
-            </p>
+            </div>
           </div>
 
           <div>
@@ -30,22 +30,22 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#about" className="text-gray-300 hover:text-amber-400 transition-colors">
+                <Link href="/#about" className="text-gray-300 hover:text-amber-400 transition-colors">
                   À propos
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="text-gray-300 hover:text-amber-400 transition-colors">
+                <Link href="/#services" className="text-gray-300 hover:text-amber-400 transition-colors">
                   Services
                 </Link>
               </li>
               <li>
-                <Link href="#gallery" className="text-gray-300 hover:text-amber-400 transition-colors">
+                <Link href="/galerie" className="text-gray-300 hover:text-amber-400 transition-colors">
                   Galerie
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="text-gray-300 hover:text-amber-400 transition-colors">
+                <Link href="/#contact" className="text-gray-300 hover:text-amber-400 transition-colors">
                   Contact
                 </Link>
               </li>

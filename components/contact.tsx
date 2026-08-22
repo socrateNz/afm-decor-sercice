@@ -23,7 +23,6 @@ export default function Contact() {
     message: "",
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState("")
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,19 +30,16 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
 
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      setSubmitMessage("Merci pour votre message! Nous vous contacterons bientôt.")
-      setFormData({ name: "", email: "", message: "" })
-    } catch (error) {
-      setSubmitMessage("Une erreur est survenue. Veuillez réessayer.")
-    } finally {
-      setIsSubmitting(false)
-    }
+    const subject = encodeURIComponent(`Nouvelle demande de devis - ${formData.name}`)
+    const body = encodeURIComponent(
+      `Nom: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    )
+    window.location.href = `mailto:afm.decor.service@gmail.com?subject=${subject}&body=${body}`
+
+    setSubmitMessage("Votre application email va s'ouvrir avec le message pré-rempli. Il ne vous reste qu'à l'envoyer.")
   }
 
   const containerVariants = {
@@ -117,7 +113,7 @@ export default function Contact() {
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <FaEnvelope className="h-5 w-5 text-amber-500 mr-3" />
-                <span>afm.decor.service@gmail.com"</span>
+                <span>afm.decor.service@gmail.com</span>
               </motion.a>
 
               <motion.div
@@ -241,19 +237,18 @@ export default function Contact() {
 
               <motion.button
                 type="submit"
-                disabled={isSubmitting}
                 className="w-full btn-primary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                animate={isSubmitting ? { scale: [1, 1.05, 1] } : {}}
-                transition={{ repeat: isSubmitting ? Infinity : 0, duration: 1 }}
               >
-                {isSubmitting ? "Envoi en cours..." : "Envoyer"}
+                Envoyer
               </motion.button>
 
               {submitMessage && (
                 <motion.p
                   className="mt-4 text-center text-green-600"
+                  role="status"
+                  aria-live="polite"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}

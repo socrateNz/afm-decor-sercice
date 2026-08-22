@@ -79,6 +79,7 @@
 @theme inline {
   /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
 
+  --color-beige-50: #FAF5F0;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
