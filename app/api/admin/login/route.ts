@@ -17,6 +17,9 @@ export async function POST(request: Request) {
   const isValidPassword =
     typeof password === "string" && (await bcrypt.compare(password, adminPasswordHash))
 
+  console.log(adminEmail, adminPasswordHash);
+
+
   if (!isValidEmail || !isValidPassword) {
     return NextResponse.json({ error: "Identifiants invalides." }, { status: 401 })
   }
