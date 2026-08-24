@@ -1,12 +1,22 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Star } from 'lucide-react'
 import { cubicBezier, motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
+import TestimonialForm from "@/components/testimonial-form"
+
+interface Testimonial {
+  id: number
+  name: string
+  rating: number
+  message: string
+}
 
 const getInitials = (name: string) => {
   const parts = name.split(/[\s-]+/).filter(Boolean)
+  if (parts.length === 0) return "?"
   if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
 }
@@ -14,27 +24,23 @@ const getInitials = (name: string) => {
 export default function Testimonials() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
+  const [hasLoaded, setHasLoaded] = useState(false)
 
-  const testimonials = [
-    {
-      name: "Sophie et Marc",
-      event: "Mariage",
-      text: "AFM Décor a transformé notre mariage en un conte de fées! Chaque détail était parfait, et nos invités n'arrêtent pas d'en parler. Un grand merci pour avoir rendu notre journée si spéciale.",
-      rating: 5,
-    },
-    {
-      name: "Isabelle",
-      event: "Baby Shower",
-      text: "Je suis tellement reconnaissante pour le magnifique baby shower organisé par AFM Décor. La décoration était exactement comme je l'avais imaginée, et le service était impeccable du début à la fin.",
-      rating: 5,
-    },
-    {
-      name: "Jean-Philippe",
-      event: "Anniversaire",
-      text: "Pour les 40 ans de ma femme, je voulais quelque chose de vraiment spécial. AFM Décor a dépassé toutes mes attentes avec une soirée élégante et personnalisée qui restera gravée dans nos mémoires.",
-      rating: 5,
-    },
-  ]
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await fetch("/api/testimonials")
+        const data = await res.json()
+        if (Array.isArray(data)) setTestimonials(data)
+      } catch {
+        // La section reste vide si l'API est indisponible.
+      } finally {
+        setHasLoaded(true)
+      }
+    }
+    fetchTestimonials()
+  }, [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -60,10 +66,22 @@ export default function Testimonials() {
     }
   }
 
+  if (hasLoaded && testimonials.length === 0) {
+    return (
+      <section id="testimonials" className="bg-white">
+        <div className="container-custom text-center">
+          <h2 className="mb-4">Témoignages</h2>
+          <p className="mb-6 text-gray-600">Soyez le premier à partager votre expérience avec AFM Décor - Service.</p>
+          <TestimonialForm />
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section id="testimonials" className="bg-white" ref={ref}>
       <div className="container-custom">
-        <motion.div 
+        <motion.div
           className="section-title"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -72,7 +90,7 @@ export default function Testimonials() {
           <h2>Témoignages</h2>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="grid md:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
@@ -80,16 +98,16 @@ export default function Testimonials() {
         >
           {testimonials.map((testimonial, index) => (
             <motion.div
-              key={index}
+              key={testimonial.id}
               className="bg-beige-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
               variants={cardVariants}
-              whileHover={{ 
+              whileHover={{
                 y: -5,
                 scale: 1.02,
                 transition: { type: "spring", stiffness: 300 }
               }}
             >
-              <motion.div 
+              <motion.div
                 className="flex mb-4"
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -100,29 +118,32 @@ export default function Testimonials() {
                     key={i}
                     initial={{ scale: 0, rotate: -180 }}
                     animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
-                    transition={{ 
-                      delay: index * 0.2 + 0.7 + i * 0.1, 
-                      type: "spring", 
-                      stiffness: 300 
+                    transition={{
+                      delay: index * 0.2 + 0.7 + i * 0.1,
+                      type: "spring",
+                      stiffness: 300
                     }}
                   >
                     <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
                   </motion.div>
                 ))}
               </motion.div>
-              <p className="text-gray-700 italic mb-6">"{testimonial.text}"</p>
+              <p className="text-gray-700 italic mb-6">"{testimonial.message}"</p>
               <div className="flex items-center gap-3">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber-400 text-white font-semibold">
                   {getInitials(testimonial.name)}
                 </div>
                 <div>
                   <p className="font-semibold">{testimonial.name}</p>
-                  <p className="text-sm text-gray-500">{testimonial.event}</p>
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
+
+        <div className="mt-10 text-center">
+          <TestimonialForm />
+        </div>
       </div>
     </section>
   )
