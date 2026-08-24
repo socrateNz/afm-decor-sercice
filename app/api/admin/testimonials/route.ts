@@ -8,12 +8,20 @@ export async function GET() {
     return NextResponse.json({ error: "Non autorisé." }, { status: 401 })
   }
 
-  await ensureTestimonialsTable()
-  const sql = getSql()
-  const rows = await sql<Testimonial[]>`
-    SELECT id, name, rating, message, status, created_at
-    FROM testimonials
-    ORDER BY (status = 'pending') DESC, created_at DESC
-  `
-  return NextResponse.json(rows)
+  try {
+    await ensureTestimonialsTable()
+    const sql = getSql()
+    const rows = await sql<Testimonial[]>`
+      SELECT id, name, rating, message, status, created_at
+      FROM testimonials
+      ORDER BY (status = 'pending') DESC, created_at DESC
+    `
+    return NextResponse.json(rows)
+  } catch (error) {
+    console.error("Erreur lecture témoignages (admin):", error)
+    return NextResponse.json(
+      { error: "Base de données indisponible. Vérifie que DATABASE_URL / POSTGRES_URL est configuré." },
+      { status: 500 }
+    )
+  }
 }

@@ -16,11 +16,15 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     return NextResponse.json({ error: "Statut invalide." }, { status: 400 })
   }
 
-  await ensureTestimonialsTable()
-  const sql = getSql()
-  await sql`UPDATE testimonials SET status = ${status} WHERE id = ${id}`
-
-  return NextResponse.json({ ok: true })
+  try {
+    await ensureTestimonialsTable()
+    const sql = getSql()
+    await sql`UPDATE testimonials SET status = ${status} WHERE id = ${id}`
+    return NextResponse.json({ ok: true })
+  } catch (error) {
+    console.error("Erreur mise à jour témoignage:", error)
+    return NextResponse.json({ error: "Une erreur est survenue." }, { status: 500 })
+  }
 }
 
 export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -31,9 +35,13 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
 
   const { id } = await params
 
-  await ensureTestimonialsTable()
-  const sql = getSql()
-  await sql`DELETE FROM testimonials WHERE id = ${id}`
-
-  return NextResponse.json({ ok: true })
+  try {
+    await ensureTestimonialsTable()
+    const sql = getSql()
+    await sql`DELETE FROM testimonials WHERE id = ${id}`
+    return NextResponse.json({ ok: true })
+  } catch (error) {
+    console.error("Erreur suppression témoignage:", error)
+    return NextResponse.json({ error: "Une erreur est survenue." }, { status: 500 })
+  }
 }
