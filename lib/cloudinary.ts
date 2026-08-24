@@ -21,7 +21,11 @@ export async function listGalleryPhotos(): Promise<GalleryPhoto[]> {
     max_results: 100,
   })
 
-  return result.resources.map((resource: any) => ({
+  const resources = [...result.resources].sort(
+    (a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  )
+
+  return resources.map((resource: any) => ({
     publicId: resource.public_id,
     url: resource.secure_url as string,
     alt: resource.context?.custom?.alt ?? "",
