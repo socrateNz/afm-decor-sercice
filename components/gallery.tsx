@@ -19,33 +19,6 @@ interface Video {
   title: string
 }
 
-const staticImages: GalleryImage[] = [
-  {
-    src: "/placeholder-v06jx.png",
-    alt: "Décoration de mariage élégante",
-  },
-  {
-    src: "/romantic-engagement-party.png",
-    alt: "Décoration de fiançailles romantique",
-  },
-  {
-    src: "/pastel-baby-shower.png",
-    alt: "Baby shower aux couleurs pastel",
-  },
-  {
-    src: "/luxury-gold-birthday.png",
-    alt: "Décoration d'anniversaire luxueuse",
-  },
-  {
-    src: "/elegant-table-setting.png",
-    alt: "Décoration de table élégante",
-  },
-  {
-    src: "/outdoor-wedding-ceremony.png",
-    alt: "Cérémonie de mariage en extérieur",
-  },
-]
-
 function getYouTubeVideoId(urlString: string) {
   try {
     const url = new URL(urlString)
@@ -97,7 +70,7 @@ export default function Gallery({ limit, viewAllHref }: GalleryProps) {
   const [videos, setVideos] = useState<Video[]>([])
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
-  const allImages = [...staticImages, ...uploadedImages]
+  const allImages = uploadedImages;
   const images = limit ? allImages.slice(0, limit) : allImages
   const displayedVideos = limit ? videos.slice(0, limit) : videos
 
