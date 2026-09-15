@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { CheckCircle } from 'lucide-react'
+import { CheckCircle2 } from 'lucide-react'
 import { cubicBezier, motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
@@ -12,29 +12,29 @@ export default function Prestations() {
 
   const prestations = [
     {
-      title: "Décoration pour tout type d'événements",
+      title: "Scénographie & Décors de salle",
       description:
-        "Nous créons des ambiances uniques adaptées à chaque occasion, en utilisant des éléments décoratifs de qualité qui transforment n'importe quel espace.",
+        "Création d'atmosphères sur-mesure combinant drapés fluides, structures florales, miroirs et éclairages tamisés adaptés à votre lieu de réception.",
     },
     {
-      title: "Planification événementielle",
+      title: "Coordination & Direction artistique",
       description:
-        "De la conception initiale à la coordination le jour J, nous gérons tous les aspects de votre événement pour que vous puissiez profiter pleinement du moment.",
+        "De la conception de la palette visuelle à l'installation le jour J, nous orchestrons chaque détail esthétique en parfaite harmonie.",
     },
     {
-      title: "Décoration personnalisée",
+      title: "Art de la table & Papeterie coordonnée",
       description:
-        "Chaque détail est soigneusement pensé pour refléter votre style et votre vision, créant ainsi une expérience authentique et mémorable.",
+        "Nappages raffinés, centres de table floraux, vaisselle soignée et marque-places personnalisés qui magnifient l'expérience de vos invités.",
     },
     {
-      title: "Location de matériel et d'articles de décoration",
+      title: "Location de mobilier & Pièces de prestige",
       description:
-        "Accédez à notre vaste collection d'articles décoratifs, de mobilier et d'accessoires pour compléter parfaitement votre événement.",
+        "Arches géométriques, fauteuils trônes, néons d'ambiance, photobooths et accessoires décoratifs sélectionnés pour leur cachet.",
     },
     {
-      title: "Service traiteur",
+      title: "Collaboration traiteurs & Partenaires locaux",
       description:
-        "Nous collaborons avec les meilleurs traiteurs de Montréal pour vous offrir une expérience culinaire exceptionnelle qui ravira vos invités.",
+        "Coordination étroite avec vos prestataires culinaires pour agencer buffets et tables avec une fluidité visuelle irréprochable.",
     },
   ]
 
@@ -43,53 +43,63 @@ export default function Prestations() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.12,
         duration: 0.6
       }
     }
   }
 
- const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: cubicBezier(0.25, 0.1, 0.25, 1) // Corrected ease definition
+        duration: 0.5,
+        ease: cubicBezier(0.25, 0.1, 0.25, 1)
       }
     }
   }
 
   return (
-    <section id="prestations" className="bg-white" ref={ref}>
+    <section id="prestations" className="bg-white py-20" ref={ref}>
       <div className="container-custom">
+        
         <motion.div
-          className="section-title"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
+          className="section-title text-center mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5 }}
         >
-          <h2>Nos Prestations</h2>
+          <span className="text-xs uppercase tracking-widest font-semibold text-amber-800 block mb-2">
+            Notre Gamme Complète
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#141210]">
+            Nos Prestations & Expertises
+          </h2>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          
           <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="lg:col-span-5 relative"
           >
-            <Image
-              src="/elegant-event-decoration.png"
-              alt="Prestations de décoration événementielle"
-              width={600}
-              height={800}
-              className="rounded-lg shadow-lg object-cover mx-auto"
-            />
+            <div className="relative mx-auto max-w-[420px] aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-200/80">
+              <Image
+                src="/elegant-event-decoration.png"
+                alt="Prestations de décoration événementielle haut de gamme à Montréal"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 420px"
+              />
+            </div>
           </motion.div>
 
           <motion.div
-            className="space-y-6"
+            className="lg:col-span-7 space-y-6"
             variants={containerVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
@@ -97,24 +107,21 @@ export default function Prestations() {
             {prestations.map((item, index) => (
               <motion.div
                 key={index}
-                className="flex gap-4"
+                className="flex gap-4 p-4 rounded-2xl border border-transparent hover:border-amber-200 hover:bg-[#FAF7F2]/60 transition-all duration-300"
                 variants={itemVariants}
-                whileHover={{ x: 10 }}
-                transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="flex-shrink-0 mt-1">
-                  <motion.div
-                    whileHover={{ scale: 1.2, rotate: 360 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <CheckCircle className="h-6 w-6 text-amber-500" />
-                  </motion.div>
+                <div className="flex-shrink-0 mt-0.5">
+                  <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-700">
+                    <CheckCircle2 className="h-5 w-5" />
+                  </div>
                 </div>
                 <div>
-                  <h3 className="text-xl mb-2 text-amber-500" style={{ fontFamily: 'var(--font-playfair)' }}>
+                  <h3 className="text-lg font-bold mb-1 text-[#141210]" style={{ fontFamily: 'var(--font-playfair)' }}>
                     {item.title}
                   </h3>
-                  <p className="text-gray-700">{item.description}</p>
+                  <p className="text-sm text-[#4a3f35] leading-relaxed font-normal">
+                    {item.description}
+                  </p>
                 </div>
               </motion.div>
             ))}

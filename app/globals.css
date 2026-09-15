@@ -171,7 +171,7 @@
   }
 
   .btn-primary {
-    @apply bg-amber-400 hover:bg-amber-500 text-white font-medium py-2 px-6 rounded-md transition-all duration-300 shadow-md;
+    @apply bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-medium py-2.5 px-6 rounded-full transition-all duration-300 shadow-md hover:shadow-lg;
   }
 
   .section-title {
@@ -179,13 +179,13 @@
   }
 
   .section-title h2 {
-    @apply relative inline-block;
+    @apply relative inline-block text-[#141210];
     font-family: var(--font-playfair), serif;
   }
 
   .section-title h2:after {
     content: "";
-    @apply block w-1/2 h-1 bg-amber-400 mx-auto mt-2;
+    @apply block w-16 h-0.5 bg-gradient-to-r from-amber-400 via-amber-600 to-amber-400 mx-auto mt-3.5 rounded-full;
   }
 
   /* Utilitaires pour le Hero de prestige */
